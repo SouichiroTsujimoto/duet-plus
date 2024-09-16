@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-duetplus-dev-a84d3-authRole",
+      "UnauthRoleArn": "arn:aws:iam::535158442159:role/amplify-duetplus-dev-a84d3-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::535158442159:role/amplify-duetplus-dev-a84d3-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-duetplus-dev-a84d3-deployment",
+      "UnauthRoleName": "amplify-duetplus-dev-a84d3-unauthRole",
+      "StackName": "amplify-duetplus-dev-a84d3",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:535158442159:stack/amplify-duetplus-dev-a84d3/535a64c0-73e6-11ef-824e-0e90ab03b3a1",
+      "AmplifyAppId": "d3b55jc8mqxl44"
+    },
+    "categories": {
+      "api": {
+        "duetplus": {}
+      }
+    }
+  }
+}
