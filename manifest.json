@@ -7,8 +7,7 @@
     "content_scripts": [
       {
         "matches": ["https://duet.doshisha.ac.jp/gakusei/*"],
-        "css": ["style.css"],
-        "js": ["script.js"]
+        "js": ["dist/main.js"]
       }
     ]
 }

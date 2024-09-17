@@ -1,10 +1,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateTodo = /* GraphQL */ `
-  subscription OnCreateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onCreateTodo(filter: $filter) {
-      code
+export const onCreateKamoku = /* GraphQL */ `
+  subscription OnCreateKamoku($filter: ModelSubscriptionKamokuFilterInput) {
+    onCreateKamoku(filter: $filter) {
+      id
       name
       number
       A
@@ -13,18 +13,17 @@ export const onCreateTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onUpdateTodo = /* GraphQL */ `
-  subscription OnUpdateTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onUpdateTodo(filter: $filter) {
-      code
+export const onUpdateKamoku = /* GraphQL */ `
+  subscription OnUpdateKamoku($filter: ModelSubscriptionKamokuFilterInput) {
+    onUpdateKamoku(filter: $filter) {
+      id
       name
       number
       A
@@ -33,18 +32,17 @@ export const onUpdateTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const onDeleteTodo = /* GraphQL */ `
-  subscription OnDeleteTodo($filter: ModelSubscriptionTodoFilterInput) {
-    onDeleteTodo(filter: $filter) {
-      code
+export const onDeleteKamoku = /* GraphQL */ `
+  subscription OnDeleteKamoku($filter: ModelSubscriptionKamokuFilterInput) {
+    onDeleteKamoku(filter: $filter) {
+      id
       name
       number
       A
@@ -53,8 +51,7 @@ export const onDeleteTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename

@@ -1,10 +1,10 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getTodo = /* GraphQL */ `
-  query GetTodo($id: ID!) {
-    getTodo(id: $id) {
-      code
+export const getKamoku = /* GraphQL */ `
+  query GetKamoku($id: ID!) {
+    getKamoku(id: $id) {
+      id
       name
       number
       A
@@ -13,23 +13,22 @@ export const getTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const listTodos = /* GraphQL */ `
-  query ListTodos(
-    $filter: ModelTodoFilterInput
+export const listKamokus = /* GraphQL */ `
+  query ListKamokus(
+    $filter: ModelKamokuFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listTodos(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listKamokus(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        code
+        id
         name
         number
         A
@@ -38,8 +37,7 @@ export const listTodos = /* GraphQL */ `
         D
         E
         F
-        ave
-        id
+        average
         createdAt
         updatedAt
         __typename

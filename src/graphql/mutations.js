@@ -1,13 +1,13 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createTodo = /* GraphQL */ `
-  mutation CreateTodo(
-    $input: CreateTodoInput!
-    $condition: ModelTodoConditionInput
+export const createKamoku = /* GraphQL */ `
+  mutation CreateKamoku(
+    $input: CreateKamokuInput!
+    $condition: ModelKamokuConditionInput
   ) {
-    createTodo(input: $input, condition: $condition) {
-      code
+    createKamoku(input: $input, condition: $condition) {
+      id
       name
       number
       A
@@ -16,21 +16,20 @@ export const createTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const updateTodo = /* GraphQL */ `
-  mutation UpdateTodo(
-    $input: UpdateTodoInput!
-    $condition: ModelTodoConditionInput
+export const updateKamoku = /* GraphQL */ `
+  mutation UpdateKamoku(
+    $input: UpdateKamokuInput!
+    $condition: ModelKamokuConditionInput
   ) {
-    updateTodo(input: $input, condition: $condition) {
-      code
+    updateKamoku(input: $input, condition: $condition) {
+      id
       name
       number
       A
@@ -39,21 +38,20 @@ export const updateTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
     }
   }
 `;
-export const deleteTodo = /* GraphQL */ `
-  mutation DeleteTodo(
-    $input: DeleteTodoInput!
-    $condition: ModelTodoConditionInput
+export const deleteKamoku = /* GraphQL */ `
+  mutation DeleteKamoku(
+    $input: DeleteKamokuInput!
+    $condition: ModelKamokuConditionInput
   ) {
-    deleteTodo(input: $input, condition: $condition) {
-      code
+    deleteKamoku(input: $input, condition: $condition) {
+      id
       name
       number
       A
@@ -62,8 +60,7 @@ export const deleteTodo = /* GraphQL */ `
       D
       E
       F
-      ave
-      id
+      average
       createdAt
       updatedAt
       __typename
