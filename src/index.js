@@ -7,34 +7,40 @@ let tokuten_bunpu = "";
 
 async function callTokutenBunpu(id, c) {
     let kamoku = await database.getKamoku(id);
-    let gpa = 0.0;
-    let grades = [ `A: ${kamoku.data.getKamoku.A.toFixed(1)}%`,
-                `B: ${kamoku.data.getKamoku.B.toFixed(1)}%`,
-                `C: ${kamoku.data.getKamoku.C.toFixed(1)}%`,
-                `D: ${kamoku.data.getKamoku.D.toFixed(1)}%`,
-                `F: ${kamoku.data.getKamoku.E.toFixed(1)}%`
-            ];
-    if(c == "A") {
-        grades[0] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[0] + "</span>"
-        gpa = 4.0;
-    } else if(c == "B") {
-        grades[1] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[1] + "</span>"
-        gpa = 3.0;
-    } else if(c == "C") {
-        grades[2] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[2] + "</span>"
-        gpa = 2.0;
-    } else if(c == "D") {
-        grades[3] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[3] + "</span>"
-        gpa = 1.0;
-    } else if(c == "F") {
-        grades[4] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[4] + "</span>"
-        gpa = 0.0;
+
+    console.log(kamoku.data.getKamoku);
+    if(kamoku.data.getKamoku != null) {
+        let gpa = 0.0;
+        let grades = [ `A: ${kamoku.data.getKamoku.A.toFixed(1)}%`,
+                    `B: ${kamoku.data.getKamoku.B.toFixed(1)}%`,
+                    `C: ${kamoku.data.getKamoku.C.toFixed(1)}%`,
+                    `D: ${kamoku.data.getKamoku.D.toFixed(1)}%`,
+                    `F: ${kamoku.data.getKamoku.E.toFixed(1)}%`
+                ];
+        if(c == "A") {
+            grades[0] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[0] + "</span>"
+            gpa = 4.0;
+        } else if(c == "B") {
+            grades[1] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[1] + "</span>"
+            gpa = 3.0;
+        } else if(c == "C") {
+            grades[2] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[2] + "</span>"
+            gpa = 2.0;
+        } else if(c == "D") {
+            grades[3] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[3] + "</span>"
+            gpa = 1.0;
+        } else if(c == "F") {
+            grades[4] = "<span style=\"text-decoration:underline;color:blue;\">" + grades[4] + "</span>"
+            gpa = 0.0;
+        }
+
+        let score = `取得したGP: <span style="color:red;">${gpa.toFixed(1)}</span>　(平均GP: <span style="color:green;">${kamoku.data.getKamoku.average.toFixed(1)}</span>)`;
+
+        // console.log(res);
+        return [score + "<br />" + grades.join("　"), kamoku.data.getKamoku.average];
+    } else {
+        return ["", -1];
     }
-
-    let score = `取得したGPA: <span style="color:red;">${gpa.toFixed(1)}</span>　(平均GPA: <span style="color:green;">${kamoku.data.getKamoku.average.toFixed(1)}</span>)`;
-
-    // console.log(res);
-    return [score + "<br />" + grades.join("　"), kamoku.data.getKamoku.average];
 }
 
 let topic_path = document.querySelector('#header #topic_path a');
@@ -64,12 +70,17 @@ if(topic_path.textContent.trim() == "成績確認") {
                 // console.log(`検索id: ${id}`);
                 let [info, gpaAve] = await callTokutenBunpu(id, score);
 
-                console.log(gpaAve);
+                if(gpaAve != -1) {
+                    console.log(gpaAve);
 
-                gpaSum += gpaAve;
-                kamokuCounter++;
+                    gpaSum += gpaAve;
+                    kamokuCounter++;
 
-                tr.children[2].innerHTML = tr.children[2].innerHTML + "<br />" + info;
+                    tr.children[2].innerHTML = tr.children[2].innerHTML + "<br />" + info;
+                } else { 
+                    tr.children[2].innerHTML = tr.children[2].innerHTML;
+                }
+
             }
         }
 

@@ -1,9 +1,8 @@
 {
     "manifest_version": 3,
     "name": "duet plus",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "DUETの科目名の隣にその詳細情報を追記する",
-    "permissions": ["storage"],
     "content_scripts": [
       {
         "matches": ["https://duet.doshisha.ac.jp/gakusei/*"],
