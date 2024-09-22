@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "duet plus",
+    "name": "DUET+",
     "version": "1.0.2",
     "description": "DUETの科目名の隣にその詳細情報を追記する",
     "content_scripts": [

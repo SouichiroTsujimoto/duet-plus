@@ -16,6 +16,14 @@ export async function createKamoku(kamoku) {
     console.log(result);
 }
 
+export async function createSubject(subject) {
+    const result = await API.graphql({
+        query: mutations.createSubject,
+        variables: { input: subject }
+    });
+    console.log(result);
+}
+
 export async function getKamoku(id) {
     const result = await API.graphql({
         query: queris.getKamoku,
@@ -24,7 +32,15 @@ export async function getKamoku(id) {
     return result;
 }
 
-export async function getAll() {
+export async function getSubject(id) {
+    const result = await API.graphql({
+        query: queris.getSubject,
+        variables: { id: id }
+    });
+    return result;
+}
+
+export async function getAllKamokus() {
     const result = await API.graphql({
         query: queris.listKamokus,
         variables: { limit: 1000 }
@@ -35,8 +51,20 @@ export async function getAll() {
     return result;
 }
 
-export async function deleteAll() {
-    let list = await getAll();
+
+export async function getAllSubejects() {
+    const result = await API.graphql({
+        query: queris.listSubjects,
+        variables: { limit: 1000 }
+    });
+    console.log("------------");
+    console.log(result);
+
+    return result;
+}
+
+export async function deleteAllKamokus() {
+    let list = await getAllKamokus();
     for await (let data of list.data.listKamokus.items) {
         console.log(data);
         const target = {
@@ -48,5 +76,41 @@ export async function deleteAll() {
         });
     }
     console.log("ALL DELETED");
-    await getAll();
+    await getAllKamokus();
 }
+
+
+export async function deleteAllSubjects() {
+    let list = await getAllSubejects();
+    for await (let data of list.data.listSubjects.items) {
+        console.log(data);
+        const target = {
+            id: data.id,
+        };
+        await API.graphql({
+            query: mutations.deleteSubject,
+            variables: { input: target }
+        });
+    }
+    console.log("ALL DELETED");
+    await getAllSubejects();
+}
+
+export async function getSubjectById1AndYear(id1, year) {
+    // console.log(`id1: ${id1}`);
+    
+    const target = {
+        id1: id1,
+        year: { eq: year },
+    };
+    
+    const result = await API.graphql({
+        query: queris.getSubjectById1AndYear,
+        variables: target,
+    });
+    // console.log("------------");
+    console.log(result);
+
+    return result;
+}
+

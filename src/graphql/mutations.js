@@ -67,3 +67,84 @@ export const deleteKamoku = /* GraphQL */ `
     }
   }
 `;
+export const createSubject = /* GraphQL */ `
+  mutation CreateSubject(
+    $input: CreateSubjectInput!
+    $condition: ModelSubjectConditionInput
+  ) {
+    createSubject(input: $input, condition: $condition) {
+      id
+      id1
+      id2
+      year
+      semester
+      name
+      number
+      A
+      B
+      C
+      D
+      F
+      other
+      average
+      teacher
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const updateSubject = /* GraphQL */ `
+  mutation UpdateSubject(
+    $input: UpdateSubjectInput!
+    $condition: ModelSubjectConditionInput
+  ) {
+    updateSubject(input: $input, condition: $condition) {
+      id
+      id1
+      id2
+      year
+      semester
+      name
+      number
+      A
+      B
+      C
+      D
+      F
+      other
+      average
+      teacher
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;
+export const deleteSubject = /* GraphQL */ `
+  mutation DeleteSubject(
+    $input: DeleteSubjectInput!
+    $condition: ModelSubjectConditionInput
+  ) {
+    deleteSubject(input: $input, condition: $condition) {
+      id
+      id1
+      id2
+      year
+      semester
+      name
+      number
+      A
+      B
+      C
+      D
+      F
+      other
+      average
+      teacher
+      createdAt
+      updatedAt
+      __typename
+    }
+  }
+`;

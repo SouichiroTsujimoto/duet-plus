@@ -14,3 +14,21 @@ type Kamoku @model {
   F: Float
   average: Float
 }
+
+type Subject @model {
+  id: ID!
+  id1: String @index(name: "byId1AndYear", sortKeyFields: ["year"], queryField: "getSubjectById1AndYear")
+  id2: String
+  year: Float
+  semester: String
+  name: String
+  number: Float
+  A: Float
+  B: Float
+  C: Float
+  D: Float
+  F: Float
+  other: Float
+  average: Float
+  teacher: String @index(name: "byTeacherAndId1", sortKeyFields: ["id1"], queryField: "getSubjectByTeacherAndId1")
+}

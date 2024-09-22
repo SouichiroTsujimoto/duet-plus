@@ -10,6 +10,19 @@
       "StackName": "amplify-duetplus-dev-a84d3",
       "StackId": "arn:aws:cloudformation:ap-northeast-1:535158442159:stack/amplify-duetplus-dev-a84d3/535a64c0-73e6-11ef-824e-0e90ab03b3a1",
       "AmplifyAppId": "d3b55jc8mqxl44"
+    }
+  },
+  "devvv": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-duetplus-devvv-50fa1-authRole",
+      "UnauthRoleArn": "arn:aws:iam::535158442159:role/amplify-duetplus-devvv-50fa1-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::535158442159:role/amplify-duetplus-devvv-50fa1-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-duetplus-devvv-50fa1-deployment",
+      "UnauthRoleName": "amplify-duetplus-devvv-50fa1-unauthRole",
+      "StackName": "amplify-duetplus-devvv-50fa1",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:535158442159:stack/amplify-duetplus-devvv-50fa1/85251f70-7889-11ef-bdaa-0e16a93d73db",
+      "AmplifyAppId": "d3b55jc8mqxl44"
     },
     "categories": {
       "api": {
