@@ -1,14 +1,9 @@
 # DUET+
-DUETにより多くの情報を表示
+同志社大学の学生用ポータルサイトDUETに、より詳細な情報を表示させます。  
+今実装している機能  
+・自身の成績を確認できるページに、各授業の成績分布情報や、同じ授業を受けた生徒の目安GPAなどを表示します。
 
-## how to contribute
-
-1. 取り組めそうなissueを捜す
-2. このリポジトリをローカルにclone
-3. 以下の記事を参考に、issueに対応するブランチを作成してcheckout
-https://qiita.com/tkmd35/items/9612c03dc60b1c516969  
-`git branch ブランチ名#番号`   
-`git checkout ブランチ名#番号`
-4. 作業を終えたら、GitHubにpush
-5. devブランチに対してpull requestを作成
-
+## install
+パソコン向けにはChrome、スマホ向けにはiOSのSafariの拡張機能として公開しています<br>
+Chrome: https://chromewebstore.google.com/detail/mofjbejpdfdfkbiicjhimkodkijekjdk?utm_source=item-share-cb <br>
+Safari(iOS): https://apps.apple.com/jp/app/duet/id6743043491
