@@ -100,7 +100,8 @@ if(topic_path?.textContent != undefined) {
                     
                     let id = args[7]; // + '-' + args[9] + "-2024-春";
                     // console.log(`検索id: ${id}`);
-                    let [info, gpaAve] = await getGradeDistributionTable(id, "2024", grade ?? "");
+                    let year = args[3];
+                    let [info, gpaAve] = await getGradeDistributionTable(id, year, grade ?? "");
 
                     if(gpaAve != undefined) {
                         // console.log(gpaAve);
