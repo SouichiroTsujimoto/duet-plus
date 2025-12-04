@@ -1,11 +1,64 @@
 // e-class
 export function addCalendarButtonToEclass() {
-    // iframeを探す（まだDOMにない場合もあるので待機）
+    // PC版: iframeを使用する場合
+    // モバイル版: 直接ページにコンテンツがある場合
+    // 両方のケースに対応する
+
+    // 0. 科目一覧ページ（トップページ）にカレンダー登録リンクを追加
+    injectCalendarLinkToTopPage();
+
+    // 1. 直接ページをチェック（モバイル版の場合）
+    waitForCsvButtonDirect(document, (csvButton, doc) => {
+        injectCalendarButton(csvButton, doc);
+    });
+
+    // 2. iframeを探す（PC版の場合）
     waitForIframe('#ip-iframe', (iframe) => {
         // CSVダウンロードボタンが見つかるまで待機
-        waitForCsvButton(iframe, (csvButton, iframeDoc) => {
+        waitForCsvButtonInIframe(iframe, (csvButton, iframeDoc) => {
             injectCalendarButton(csvButton, iframeDoc);
         });
+    });
+}
+
+// 科目一覧ページ（トップページ）にカレンダー登録の案内テキストを追加
+function injectCalendarLinkToTopPage() {
+    // 科目一覧ページかどうか確認
+    // URLが /webclass/ で終わるか、/webclass/index.php を含む場合
+    const url = window.location.href;
+    const isTopPage = url.match(/\/webclass\/?(\?.*)?$/) || url.includes('/webclass/index.php');
+    
+    if (!isTopPage) return;
+    
+    // 「課題実施状況一覧」というタイトルを持つセクションを探す
+    const sideBlockTitles = document.querySelectorAll('h4.side-block-title');
+    
+    sideBlockTitles.forEach(title => {
+        if (title.textContent?.includes('課題実施状況一覧')) {
+            // このタイトルの親要素内のmenugroupを探す
+            const sideBlock = title.closest('.side-block');
+            if (!sideBlock) return;
+            
+            const menugroup = sideBlock.querySelector('ul.menugroup');
+            if (!menugroup) return;
+            
+            // 既に追加されていないか確認
+            if (menugroup.querySelector('.duet-plus-calendar-text')) return;
+            
+            // 案内テキストを作成
+            const li = document.createElement('li');
+            li.className = 'duet-plus-calendar-text';
+            
+            const text = document.createElement('span');
+            text.textContent = '» 締切日のカレンダー登録は「ダッシュボード」から';
+            text.style.color = 'rgb(120, 120, 120)';
+            text.style.fontSize = 'small';
+            text.style.display = 'block';
+            text.style.padding = '0.2em';
+            
+            li.appendChild(text);
+            menugroup.appendChild(li);
+        }
     });
 }
 
@@ -30,8 +83,52 @@ function waitForIframe(selector: string, callback: (iframe: HTMLIFrameElement) =
     observer.observe(document.body, { childList: true, subtree: true });
 }
 
-// CSVダウンロードボタンが見つかるまで待機（Vue/Reactが描画するまで待つ）
-function waitForCsvButton(
+// 直接ドキュメントでCSVダウンロードボタンが見つかるまで待機（モバイル版用）
+function waitForCsvButtonDirect(
+    doc: Document,
+    callback: (csvButton: HTMLButtonElement, doc: Document) => void
+) {
+    const tryFind = (): boolean => {
+        // URLが課題実施状況一覧ページかどうか確認
+        if (!window.location.href.includes('score_summary_table/dashboard')) {
+            return false;
+        }
+        
+        // 「課題実施状況一覧」ページかどうか確認
+        const h1 = Array.from(doc.querySelectorAll('h1'))
+            .find(el => el.textContent?.includes('課題実施状況一覧'));
+        
+        if (!h1) return false;
+        
+        // CSVダウンロードボタンを探す
+        const csvButton = Array.from(doc.querySelectorAll('button'))
+            .find(btn => btn.textContent?.includes('CSVダウンロード')) as HTMLButtonElement | undefined;
+        
+        if (csvButton) {
+            callback(csvButton, doc);
+            return true;
+        }
+        return false;
+    };
+    
+    // 既に見つかった場合
+    if (tryFind()) return;
+    
+    // ポーリングで探す（Vue/Reactがデータを取得して描画するまで待つ）
+    const interval = setInterval(() => {
+        if (tryFind()) {
+            clearInterval(interval);
+        }
+    }, 500);
+    
+    // 30秒後にタイムアウト
+    setTimeout(() => {
+        clearInterval(interval);
+    }, 30000);
+}
+
+// CSVダウンロードボタンが見つかるまで待機（Vue/Reactが描画するまで待つ）- iframe版
+function waitForCsvButtonInIframe(
     iframe: HTMLIFrameElement, 
     callback: (csvButton: HTMLButtonElement, iframeDoc: Document) => void
 ) {
@@ -188,7 +285,7 @@ function updateGoogleCalendarTaskList(iframeDoc: Document, taskList: HTMLElement
         link.innerHTML = `
             <div style="font-weight: 500;">【e-class課題締切】${escapeHTML(task.taskName)}</div>
             <div style="font-size: 0.875rem; color:rgb(0, 0, 0); margin-top: 2px;">
-                ${escapeHTML(task.courseName)} | <span style="color:rgb(204, 0, 0);">締切: ${deadlineStr}</span>
+                ${escapeHTML(task.courseName)} | <span style="color:rgb(204, 0, 0);">締切日時: ${deadlineStr}</span>
             </div>
         `;
         
